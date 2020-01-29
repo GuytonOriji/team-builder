@@ -109,22 +109,23 @@ background-color:rgba(250,250,250,.2);
 
 
 
-let memz = []
 
 export default function Center (){
     let [member, setmember] = useState({ name: "", contact: "" , job: ""})
 
-        
+        const WhileTyping =(e) =>{
+            setmember({ ...member, [e.target.name]: e.target.value });
+        }
 
 
       const Clicked = e => {
           console.log(e.target.parentNode.parentNode.parentNode.parentNode.children[1].children[0]);
           
-        setmember(member = { 
-            name: e.target.parentNode.parentNode.children[1].value, 
-            contact: e.target.parentNode.parentNode.children[3].value , 
-            job: e.target.parentNode.parentNode.children[5].value})
-        memz.push(member)
+        // setmember(member = { 
+        //     name: e.target.parentNode.parentNode.children[1].value, 
+        //     contact: e.target.parentNode.parentNode.children[3].value , 
+        //     job: e.target.parentNode.parentNode.children[5].value})
+        // memz.push(member)
             
     
         document.querySelector(".row").append( 
@@ -147,7 +148,7 @@ export default function Center (){
 
       useEffect(()=>{
         setmember({ name: "", contact: "" , job: ""})
-      },[memz])
+      },[])
 
     return (
         <Container>
@@ -157,14 +158,17 @@ export default function Center (){
             <Formlet className="form"  >
             <label htmlFor="name">Name:</label>
             <input type="text" placeholder="Name here..." 
+            onChange={WhileTyping}
             name="name"/>
 
             <label htmlFor="contact">Contact:</label>
             <input type="text" placeholder="Contact here..."
+            onChange={WhileTyping}
             name="contact"/>
 
             <label htmlFor="job">Job:</label>
             <input type="text" placeholder="Job here..."
+            onChange={WhileTyping}
             name='job'/>
 
             <div>
@@ -194,22 +198,8 @@ export default function Center (){
                 <Remove>Remove</Remove>
             </Card>
            
-            {
-         memz.forEach(mem=>{ return (
-            <Card>
-            <ConSkill>
-        <Name>{mem.name}</Name>
-            </ConSkill>
-                
-                <ConSkill>
-                      <Con>{mem.contact}</Con>
-                    <Skill>{mem.job}</Skill>
-                </ConSkill>
-                <Remove>Remove</Remove>
-            </Card>
-          ) } )
-      }
-           
+       
+      
                 </Row>
                
 
