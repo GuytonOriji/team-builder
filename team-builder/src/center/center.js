@@ -25,7 +25,7 @@ width:100%;
 
 
 
-const Formlet = styled.div`
+const Formlet = styled.form`
 flex:1;
 display:flex;
 flex-direction:column;
@@ -109,27 +109,23 @@ background-color:rgba(250,250,250,.2);
 
 
 
-
 export default function Center (){
-    let [member, setmember] = useState({ name: "", contact: "" , job: ""})
+    let [member, setmember] = useState({ name: "", contact: "" , job: "" })
 
         const WhileTyping =(e) =>{
             setmember({ ...member, [e.target.name]: e.target.value });
         }
+        console.log(member)
 
 
       const Clicked = e => {
-          console.log(e.target.parentNode.parentNode.parentNode.parentNode.children[1].children[0]);
-          
-        // setmember(member = { 
-        //     name: e.target.parentNode.parentNode.children[1].value, 
-        //     contact: e.target.parentNode.parentNode.children[3].value , 
-        //     job: e.target.parentNode.parentNode.children[5].value})
-        // memz.push(member)
-            
-    
-        document.querySelector(".row").append( 
-        <Card>
+e.preventDefault()
+
+
+
+       
+                  return (
+            <Card>
             <ConSkill>
         <Name>{member.name}</Name>
             </ConSkill>
@@ -139,23 +135,26 @@ export default function Center (){
                     <Skill>{member.job}</Skill>
                 </ConSkill>
                 <Remove>Remove</Remove>
-            </Card>)
-
-            console.log(member.name)
+            </Card>
+                  )
+              }
+          
        
-      };
+            console.log(member);
+            
+    
+     
 
+    
 
-      useEffect(()=>{
-        setmember({ name: "", contact: "" , job: ""})
-      },[])
+    
 
     return (
         <Container>
             <FormBox> 
 
                  
-            <Formlet className="form"  >
+            <Formlet className="form"  onSubmit={e=>Clicked(e)}>
             <label htmlFor="name">Name:</label>
             <input type="text" placeholder="Name here..." 
             onChange={WhileTyping}
@@ -172,7 +171,7 @@ export default function Center (){
             name='job'/>
 
             <div>
-                <input type="submit" onClick={Clicked}/>
+                <input type="submit" />
             </div>
             </Formlet>
 
@@ -199,7 +198,6 @@ export default function Center (){
             </Card>
            
        
-      
                 </Row>
                
 
